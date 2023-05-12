@@ -1,0 +1,9 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//    TIME           //     LOGGER        // LOG LEVEL //              MESSAGE                                  //
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+04/26/23 06:24 PM ... ActivityLogger     : DEBUG      : This is a log message from the index page
+04/26/23 06:25 PM ... ActivityLogger     : DEBUG      : This is a log message from the index page
+04/28/23 10:31 AM ... ActivityLogger     : INFO       : Email sent to tega (volunteer).
+04/28/23 05:51 PM ... ActivityLogger     : INFO       : Email sent to Tega (volunteer).
+04/28/23 07:06 PM ... ActivityLogger     : INFO       : Email sent to Tega (volunteer).
+04/28/23 07:06 PM ... ActivityLogger     : INFO       : Email sent to Tega from the contact page.

@@ -1,0 +1,118 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block title %}ACF | Donations{% endblock %}
+
+{% block overlay_img_url %} {% static 'images/bg_6.jpg' %} {% endblock %}
+{% block overlay_name %} Donations {% endblock %}
+{% block other_link %} Donate {% endblock %}
+
+{% block head_addons %}
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+{% endblock %}
+
+{% block content %}
+    
+    <section class="ftco-section bg-light">
+      <div class="container">
+
+        <div class="row">
+					{% for donation in donations %}
+						<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
+							<div class="staff">
+								<div class="d-flex mb-4">
+									<div class="img" style="background-image: url('{{donation.donator.picture.url}}');"></div>
+									<div class="info ml-4">
+										<h3><a href="teacher-single.html">{{donation.donator.full_name}}</a></h3>
+										<span class="position">Donated Just now</span>
+										<div class="text">
+											<p>Donated <span>₦{{donation.amount}}</span> for <a href="/donate">{{donation.cause.title}}</a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+        </div>
+
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>	
+					
+								{% if donations.has_previous %}
+						            <li><a href="?page=1">&lt;&lt;</a></li>
+								    <li><a href="?page={{donations.previous_page_number}}">&lt;</a></li>
+								{% endif %}
+
+								{% for page_number in custom_range %}
+									{% if page_number == donations.number %}
+										<li class="active"><a href="?page={{page_number}}">{{page_number}}</a></li>
+									{% else %}
+										<li><a href="?page={{page_number}}">{{page_number}}</a></li>
+									{% endif %}
+								{% endfor %}
+
+								{% if donations.has_next %}
+								    <li><a href="?page={{donations.next_page_number}}">&gt;</a></li>
+									<li><a href="?page={{paginator.num_pages}}">&gt;&gt;</a></li>
+								{% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+		<div class="row justify-content-center">
+			<div class="col-lg-2">
+				<button type="button" style="border-radius:8px" class="btn btn-outline-success w-100 btn-lg mt-4 mb-3 mx-2"  data-toggle="modal" data-target="#donateModal">Donate</button>
+
+			</div>
+		</div>
+
+		<div class="modal fade" id="donateModal" tabindex="-1" role="dialog" aria-labelledby="donateModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title" id="donateModalLabel">Donate to Our Charity</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <form action="." method='POST'>
+					{% csrf_token %}
+					<div class="form-group">
+					  <label for="donationAmount">Donation Amount</label>
+					  <input type="number" class="form-control" id="donationAmount" placeholder="Enter donation amount">
+					</div>
+					<div class="form-group">
+					  <label for="donorName">Your Name</label>
+					  <input type="text" class="form-control" id="donorName" placeholder="Enter your name">
+					</div>
+					<div class="form-group">
+					  <label for="donorEmail">Your Email</label>
+					  <input type="email" class="form-control" id="donorEmail" placeholder="Enter your email">
+					</div>
+				  </form>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				  <button type="submit" class="btn btn-primary">Donate</button>
+				</div>
+			  </div>
+			</div>
+		</div>
+
+      </div>
+    </section>
+
+    {% include 'volunteer_form.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.5.2.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+{% endblock %}
+    

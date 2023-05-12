@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ACF | Events{% endblock %}
+
+{% block overlay_img_url %} {% static 'images/bg_2.jpg' %} {% endblock %}
+{% block overlay_name %} Events {% endblock %}
+{% block other_link %} Event {% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'search_events.css' %}">
+{% endblock %}
+
+{% block content %}    
+
+    <section class="ftco-section bg-light">
+    	<div class="container-fluid">
+        <div class="row justify-content-center pb-2">
+          <div class="col-md-3"></div>
+          <div class="col-md-5 heading-section ftco-animate text-center">
+            <h2 class="mt-4 pt-2">Causes/Upcoming Events</h2>
+          </div>
+          <div class="col-md-3 sidebar ftco-animate">
+            <div class="sidebar-box">
+              <form action="." class="search-form" id="eventSearchForm" method="POST" autocomplete="off">
+                {% csrf_token %}
+                <div class="form-group">
+                  <span class="icon fa fa-search"></span>
+                  <input type="text" id="eventSearchBox" name="search_query" class="form-control" placeholder="Search Events">
+                </div>
+              </form>
+              <div id="eventResultBox" class="event-results-card not-visible w-100" ></div>
+            </div>
+          </div>
+        </div>
+
+    		<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="carousel-cause owl-carousel">
+
+              {% for cause in causes %}
+                <div class="item">
+                  <div class="cause-entry">
+                    <a href="{% url 'main:donate_view' %}" class="img" style="background-image: url('{{cause.image.url}}');"></a>
+                    <div class="text p-3 p-md-4">
+                      <h3><a href="{% url 'main:donate_view' %}">{{cause.title}}</a></h3>
+                      <p>{{cause.description}}</p>
+                      <span class="mb-3 d-block">Event date: {{ cause.event_date|default_if_none:"Not specified" }}</span>
+                      <div class="progress custom-progress-success">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{cause.percentage}}%" aria-valuenow="{{cause.percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <span class="fund-raised d-block">₦{{cause.reached_amount}} raised of ₦{{cause.target_amount}}</span>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+
+    <div class="row justify-content-center mb-5 pb-3">
+      <div class="col-md-7 heading-section ftco-animate text-center mt-4">
+        <h2 class="mb-4">Past Events</h2>
+      </div>
+    </div>
+    
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row d-flex">
+          
+          {% for event in events %}
+            <div class="col-md-4 d-flex ftco-animate">
+              <div class="blog-entry align-self-stretch">
+                <a href="{{event.get_absolute_url}}" class="block-20" style="background-image: url('{{event.image.url}}');">
+                </a>
+                <div class="text p-4 d-block">
+                  <div class="meta mb-3">
+                    <div><a href="{{event.get_absolute_url}}">{{event.date}}</a></div>
+                    <div><a href="{{event.get_absolute_url}}">{{event.creator}}</a></div>
+                    <div><a href="{{event.get_absolute_url}}" class="meta-chat"><span class="icon-chat"></span> {{event.comment_count}}</a></div>
+                  </div>
+                  <h3 class="heading mt-3"><a href="{{event.get_absolute_url}}">{{event.name}}</a></h3>
+                  <p>{{event.description}}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor%}
+          
+
+        </div>
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+                {% if events.has_previous %}
+                        <li><a href="?page=1">&lt;&lt;</a></li>
+                    <li><a href="?page={{events.previous_page_number}}">&lt;</a></li>
+                {% endif %}
+
+                {% for page_number in custom_range %}
+                  {% if page_number == events.number %}
+                    <li class="active"><a href="?page={{page_number}}">{{page_number}}</a></li>
+                  {% else %}
+                    <li><a href="?page={{page_number}}">{{page_number}}</a></li>
+                  {% endif %}
+                {% endfor %}
+
+                {% if events.has_next %}
+                    <li><a href="?page={{events.next_page_number}}">&gt;</a></li>
+                  <li><a href="?page={{paginator.num_pages}}">&gt;&gt;</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+		
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'search_events.js' %}" defer></script>
+{% endblock %}
+  
+

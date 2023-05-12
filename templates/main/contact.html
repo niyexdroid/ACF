@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+    
+{% block title %}ACF | Contact Us{% endblock %}
+
+{% block overlay_img_url %} {% static 'images/bg_2.jpg' %} {% endblock %}
+{% block overlay_name %} Contact us {% endblock %}
+{% block other_link %} Contact {% endblock %}
+
+{% block scripts %}
+<style>
+  li span{
+    position: relative;
+    list-style-type: none;
+    left: -30px;
+  }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+  <section class="ftco-section contact-section ftco-degree-bg">
+    <div class="container">
+      <div class="row d-flex mb-5 contact-info">
+        <div class="col-md-12 mb-4">
+          <h2 class="h4">Contact Information</h2>
+        </div>
+        <div class="col-md-6 ">
+          <ul style="list-style-type: none;">
+            <li><span>Address:</span> Plot 53 Block 99 Flat 1, Iba Housing Estate, Iba-Ojo, Lagos</li>
+            <li><span>Phone:</span> <a href="https://wa.me/+2348168819022">+234 816 8819 022</a></li>
+            <li><span>Email:</span> <a href="mailto:abosedeainafoundation@aol.com">abosedeainafoundation@aol.com</a></li>
+            <li><span>Website:</span> <a href="#">yoursite.com</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="row block-9">
+        <div class="col-md-6 pr-md-5">
+        	<h4 class="mb-4">Do you have any questions?</h4>
+          <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <input name="contact_name" type="text" class="form-control" placeholder="Your Name">
+            </div>
+            <div class="form-group">
+              <input name="contact_email" type="text" class="form-control" placeholder="Your Email">
+            </div>
+            <div class="form-group">
+              <input name="contact_subject" type="text" class="form-control" placeholder="Subject">
+            </div>
+            <div class="form-group">
+              <textarea name="contact_message" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+            </div>
+            <div class="form-group">
+              <input name="send_email_messages" type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+            </div>
+          </form>
+        
+        </div>
+
+        <div class="col-md-6" id="map"></div>
+        <!-- <div  class="col-md-6">
+          <iframe src="https://www.google.com/maps/search/iba+housing+estate+ojo+lagos/@6.492418,3.1954183,17z/data=!3m1!4b1!4m8!2m7!3m6!1siba+housing+estate+ojo+lagos!2sIba+Housing+Estate+Muslims+Community+Central+Mosque,+Iba+Housing+Estate,+Ojo+102101,+Lagos!3s0x103b8418f232552f:0x5b298da572a89d1!4m2!1d3.1965268!2d6.4905083"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

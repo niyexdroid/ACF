@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}ACF | Blog | {{post.title}}{% endblock %}
+
+{% block overlay_img_url %} {{post.image.url}} {% endblock %}
+{% block overlay_name %} {{post.title}} {% endblock %}
+{% block other_link %} Post | Post Details {% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'search_posts.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+  <section class="ftco-section ftco-degree-bg">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-8 ftco-animate">
+          <h2 class="mb-3">{{post.title}}</h2>
+          <p>{{post.content|safe}}</p>
+          <p>
+            <img src="{ % static 'images/image_7.jpg' % }" alt="" class="img-fluid">
+          </p>
+          <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
+          <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
+          <p>Quisquam esse aliquam fuga distinctio, quidem delectus veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde aut non tenetur tempore, nisi culpa voluptate maiores officiis quis vel ab consectetur suscipit veritatis nulla quos quia aspernatur perferendis, libero sint. Error, velit, porro. Deserunt minus, quibusdam iste enim veniam, modi rem maiores.</p>
+          <p>Odit voluptatibus, eveniet vel nihil cum ullam dolores laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis porro explicabo soluta commodi libero voluptatem similique id quidem? Blanditiis voluptates aperiam non magni. Reprehenderit nobis odit inventore, quia laboriosam harum excepturi ea.</p>
+          <p>Adipisci vero culpa, eius nobis soluta. Dolore, maxime ullam ipsam quidem, dolor distinctio similique asperiores voluptas enim, exercitationem ratione aut adipisci modi quod quibusdam iusto, voluptates beatae iure nemo itaque laborum. Consequuntur et pariatur totam fuga eligendi vero dolorum provident. Voluptatibus, veritatis. Beatae numquam nam ab voluptatibus culpa, tenetur recusandae!</p>
+          <p>Voluptas dolores dignissimos dolorum temporibus, autem aliquam ducimus at officia adipisci quasi nemo a perspiciatis provident magni laboriosam repudiandae iure iusto commodi debitis est blanditiis alias laborum sint dolore. Dolores, iure, reprehenderit. Error provident, pariatur cupiditate soluta doloremque aut ratione. Harum voluptates mollitia illo minus praesentium, rerum ipsa debitis, inventore?</p>
+          <div class="tag-widget post-tag-container mb-5 mt-5">
+            <div class="tagcloud">
+              <a href="#" class="tag-cloud-link">Life</a>
+              <a href="#" class="tag-cloud-link">Sport</a>
+              <a href="#" class="tag-cloud-link">Tech</a>
+              <a href="#" class="tag-cloud-link">Travel</a>
+            </div>
+          </div>
+          
+          <div class="about-author d-flex p-5 bg-light">
+            <div class="bio align-self-md-center mr-5">
+              <img src="{{post.author.profile.image.url}}" alt="Image placeholder" style="width:128px; height:128px" class="">
+            </div>
+            <div class="desc align-self-md-center">
+              <h3>{{post.author.username}}</h3>
+              <p>{{post.author.profile.bio}}</p>
+            </div>
+          </div>
+
+
+          <div class="pt-5 mt-5">
+
+            <h3 class="mb-5">{{post.comment_count}} Comment{{post.comment_count|pluralize}}</h3>
+
+            <ul class="comment-list">
+              {% for comment in post_base_comments %}
+                <li class="comment">
+                  <div class="vcard bio">
+                    <img src="{{comment.commentor_image.url}}" alt="Image placeholder">
+                  </div>
+
+                  <div class="comment-body">
+
+                    <h3>{{comment.commentor_name}}</h3>
+                    <div class="meta">{{comment.creation_date}}</div>
+                    <p>{{comment.content}}</p>
+                    <p><a href="?reply_to={{comment.id}}#comment_section" class="reply">Reply</a></p>
+
+                  </div>
+
+                  {% if comment.replies %}
+                    {% include 'blog/comment_replies.html' %}
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+
+            
+
+          </div>
+        </div>
+
+        <div class="col-md-4 sidebar ftco-animate">
+
+          <div class="sidebar-box">
+            <form action="." class="search-form" id="postSearchForm" method="POST" autocomplete="off">
+              {% csrf_token %}
+              <div class="form-group">
+                <span class="icon fa fa-search"></span>
+                <input type="text" id="postSearchBox" name="search_query" class="form-control" placeholder="Search Posts">
+              </div>
+            </form>
+            <div id="postResultBox" class="post-results-card not-visible w-100" ></div>
+          </div>
+
+          <div class="sidebar-box ftco-animate">
+            <div class="categories">
+              <h3>Categories</h3>
+              {% for category in categories %}
+                <li><a href="{% url 'blog:post-list' %}?category={{category.label}}">{{category.label}} <span>({{category.posts.count}})</span></a></li>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="sidebar-box ftco-animate">
+            <h3>Latest Posts</h3>
+            {% for post in latest_posts %}
+              <div class="block-21 mb-4 d-flex">
+                <a href="{{post.get_absolute_url}}" class="blog-img mr-4" style="background-image: url('{{post.image.url}}');"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="{{post.get_absolute_url}}"> {{post.title}}</a></h3>
+                  <div class="meta">
+                    <div><a href="{{post.get_absolute_url}}"><span class="icon-calendar"></span> {{post.creation_date}}</a></div>
+                    <div><a href="{{post.get_absolute_url}}"><span class="icon-person"></span> {{post.author}}</a></div>
+                    <div><a href="{{post.get_absolute_url}}"><span class="icon-chat"></span> {{post.comment_count}}</a></div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <div class="sidebar-box ftco-animate">
+            <h3>Tag Cloud</h3>
+            <div class="tagcloud">
+              <a href="#" class="tag-cloud-link">dish</a>
+              <a href="#" class="tag-cloud-link">menu</a>
+              <a href="#" class="tag-cloud-link">food</a>
+              <a href="#" class="tag-cloud-link">sweet</a>
+              <a href="#" class="tag-cloud-link">tasty</a>
+              <a href="#" class="tag-cloud-link">delicious</a>
+              <a href="#" class="tag-cloud-link">desserts</a>
+              <a href="#" class="tag-cloud-link">drinks</a>
+            </div>
+          </div>
+
+          <div class="sidebar-box ftco-animate">
+            <h3>Paragraph</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section> <!-- .section -->
+
+  <section id="comment_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 ftco-animate">
+          <div class="comment-form-wrap">
+
+            <h3 class="mb-3 mt-5">Leave a comment</h3> 
+
+            <form action="" class="p-5 bg-light" method="POST">
+
+              {% csrf_token %}
+
+              <div class="form-group">
+                <label for="commentor_name">Name *</label>
+                <input type="text" class="form-control" name="commentor_name" autocomplete="off">
+              </div>
+              
+              <div class="form-group">
+                <label for="commentor_message">Message</label>
+                <textarea name="commentor_message" cols="30" rows="10" class="form-control" autocomplete="off"></textarea>
+              </div>
+
+              <div class="form-group">
+                <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary" name="create_comment">
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'search_posts.js' %}" defer></script>
+{% endblock %}

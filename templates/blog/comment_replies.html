@@ -1,0 +1,26 @@
+<ul class="children">
+  {% for comment in comment.replies.all %}
+    <li class="comment">
+
+      <div class="vcard bio">
+
+        <img src="{{comment.commentor_image.url}}" alt="Image placeholder">
+
+      </div>
+
+      <div class="comment-body">
+
+        <h3>{{comment.commentor_name}}</h3>
+        <div class="meta">{{comment.creation_date}}</div>
+        <p>{{comment.content}}</p>
+        <p><a href="?reply_to={{comment.id}}#comment_section" class="reply">Reply</a></p>
+
+      </div>
+      <!-- recursive templating -->
+      {% if comment.replies %}
+        {% include 'blog/comment_replies.html' %}
+      {% endif %}
+
+    </li>
+  {% endfor %}
+</ul>

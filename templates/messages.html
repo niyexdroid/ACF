@@ -1,0 +1,9 @@
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <div class="{{ message.tags }} sticky-top w-100" id="message_container">
+                <h2 class=" text-center">{{ message }}</h2>
+            </div>
+        {% endfor %}
+    </ul>   
+{% endif %}

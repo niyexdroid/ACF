@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}ACF | Home{% endblock %}
+
+
+{% block overlay %}  
+    <div class="hero-wrap overlay"  data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+            <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">ABOSEDEAINA CHARITY FOUNDATION</h1>
+            <h2 class="mb-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Medical Outreach</h2>
+            
+            
+            
+            <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+              <a href="https://www.youtube.com/watch?v=gqaZhqD2100" class="btn btn-white btn-outline-white px-4 py-3 popup-vimeo">
+                <span class="icon-play mr-2"></span>Watch Video
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+
+  
+    <section class="ftco-counter ftco-intro text-center" id="section-counter">
+    	<div class="container">
+    		<div class="row no-gutters">
+    			<div class="col-md-5 d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18 color-1 align-items-stretch">
+              <div class="text ">
+              	<span>Treated and Provided relief packages for Over</span>
+                <strong class="number" data-number="400">0</strong>
+                <span>Individuals across Nigeria</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18 color-2 align-items-stretch">
+              <div class="text">
+              	<h3 class="mb-4">Donate Money</h3>
+              	<p>“It is every man’s obligation to put back into the world at least the equivalent of what he takes out of it."</p>
+              	<p><a href="/donate" class="btn btn-white px-3 py-2 mt-2 pad">Donate Now</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18 color-3 align-items-stretch">
+              <div class="text">
+              	<h3 class="mb-4">Be a Volunteer</h3>
+              	<p>“We cannot live only for ourselves. A thousand fibers connect us with our fellow men”</p>
+              	<p><a href="#volunteer" class="btn btn-white px-3 py-2 mt-2 pad">Be A Volunteer</a></p>
+              </div>
+            </div>
+          </div>
+    		</div>
+    	</div>
+    </section>
+
+    
+
+    <section class="ftco-section">
+    	<div class="container">
+    		<div class="row justify-content-center">
+          <div class="col-md-5 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 d-flex services p-3 py-4 d-block">
+              <div class="icon d-flex mb-3"><span><img src="{% static 'images/001-aim.png' %}" alt="Aim" class="my_flaticon"></span></div>
+              <div class="media-body pl-4 text-align-center">
+                <h3 class="heading">Aim</h3>
+                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 d-flex services p-3 py-4 d-block">
+              <div class="icon d-flex mb-3"><span><img src="{% static 'images/002-mountain.png' %}" alt="Mission" class="my_flaticon"></span></div>
+              <div class="media-body pl-4 text-align-center">
+                <h3 class="heading">Mission Statement</h3>
+                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 d-flex services p-3 py-4 d-block">
+              <div class="icon d-flex mb-3"><span class="flaticon-donation-1"></span></div>
+              <div class="media-body pl-4">
+                <h3 class="heading">Make Donation</h3>
+                <p>Every donation you make today will be used to provide relief packs and drugs for the less priviledge, the sick and the Orphanages</p>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 d-flex services p-3 py-4 d-block">
+              <div class="icon d-flex mb-3"><span class="flaticon-charity"></span></div>
+              <div class="media-body pl-4">
+                <h3 class="heading">Become A Volunteer</h3>
+                <p>Volunteering is an act of heroism on a grand scale. And it matters profoundly. It does more than help people beat the odds; it changes the odds.</p>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 d-flex services p-3 py-4 d-block">
+              <div class="icon d-flex mb-3"><span class="flaticon-donation"></span></div>
+              <div class="media-body pl-4">
+                <h3 class="heading">Sponsorship</h3>
+                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+              </div>
+            </div>    
+          </div>
+        </div>
+    	</div>
+    </section>
+
+
+    <section class="ftco-section bg-light">
+    	<div class="container-fluid">
+
+    		
+
+        <div class="row">
+          <div class="col-md-12 ftco-animate">
+            <div class="carousel-cause owl-carousel">
+
+              {% for cause in queryset_1 %}
+                <div class="item">
+                  <div class="cause-entry">
+                    <a href="{% url 'main:donate_view' %}" class="img" style="background-image: url('{{cause.image.url}}');"></a>
+                    <div class="text p-3 p-md-4">
+                      <h3><a href="{% url 'main:donate_view' %}">{{cause.title}}</a></h3>
+                      <p>{{cause.description}}</p>
+                      <span class="mb-3 d-block">Event date: {{ cause.event_date|default_if_none:"Not specified" }}</span>
+                      <div class="progress custom-progress-success">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{cause.percentage}}%" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <span class="fund-raised d-block">₦{{cause.reached_amount}} raised of ₦{{cause.target_amount}}</span>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+
+            </div>
+          </div>
+        </div>
+
+
+    	</div>
+    </section>
+
+
+
+    <section class="ftco-section">
+      <div class="container">
+      	<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section ftco-animate text-center">
+            <h2 class="mb-4">Latest Donations</h2>
+            <p>Every <i>donation</i> sparks a person's <i>elation</i>...  </p>
+          </div>
+        </div>
+        <div class="row">
+          {% for donation in queryset_2 %}
+            <div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
+              <div class="staff">
+                <div class="d-flex mb-4">
+                  <div class="img" style="background-image: url('{{donation.donator.picture.url}}');"></div>
+                  <div class="info ml-4">
+                    <h3>{{donation.donator.full_name}}</h3>
+                    <span class="position">Donated Just now</span>
+                    <div class="text">
+                      <p>Donated <span>₦{{donation.amount}}</span> for <a href="{% url 'main:donate_view' %}">{{donation.cause.title}}</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+
+    
+    <section class="ftco-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section ftco-animate text-center">
+            <h2 class="mb-4">Our Latest Events</h2>
+          </div>
+        </div>
+        <div class="row">
+          {% for event in queryset_3 %}
+            <div class="col-md-4 d-flex ftco-animate">
+              <div class="blog-entry align-self-stretch">
+                <a href="{{event.get_absolute_url}}" class="block-20" style="background-image: url('{{event.image.url}}');">
+                </a>
+                <div class="text p-4 d-block">
+                  <div class="meta mb-3">
+                    <div><a href="{{event.get_absolute_url}}">{{event.date}}</a></div>
+                    <div><a href="{{event.get_absolute_url}}">{{event.creator}}</a></div>
+                    <div><a href="{{event.get_absolute_url}}" class="meta-chat"><span class="icon-chat"></span> {{event.comment_count}}</a></div>
+                  </div>
+                  <h3 class="heading mb-4"><a href="{{event.get_absolute_url}}">{{event.name}}</a></h3>
+                  <p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> {{event.time}}</span> <span><i class="icon-map-o"></i> {{event.venue}}</span></p>
+                  <p>{{event.description}}</p>
+                  <p><a href="{{event.get_absolute_url}}">Join Event <i class="ion-ios-arrow-forward"></i></a></p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+		
+
+
+
+    <section class="ftco-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section ftco-animate text-center">
+            <h2 class="mb-4">Our Latest Blog Posts</h2>
+          </div>
+        </div>
+        <div class="row">
+          {% for post in queryset_4 %}
+            <div class="col-md-4 d-flex ftco-animate">
+              <div class="blog-entry align-self-stretch">
+                <a href="{{post.get_absolute_url}}" class="block-20" style="background-image: url('{{post.image.url|default_if_none:None}}');">
+                </a>
+                <div class="text p-4 d-block">
+                  <div class="meta mb-3">
+                    <div><a href="{{post.get_absolute_url}}"><span class="icon-calendar"></span> {{post.creation_date}}</a></div>
+                    <div><a href="{{post.get_absolute_url}}"><span class="icon-person"></span> {{post.author}}</a></div>
+                    <div><a href="{{post.get_absolute_url}}"><span class="icon-chat"></span> {{post.comment_count}}</a></div>
+                    
+                  </div>
+                  <h3 class="heading mt-3"><a href="{{post.get_absolute_url}}">{{post.title}}</a></h3>
+                  <p>{{post.content|truncatechars:100}}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor%}
+        </div>
+
+      </div>
+    </section>
+
+		
+
+    <section class="ftco-section bg-light">
+
+      <div class="row justify-content-center pb-2">
+          
+        <div class="col-md-12 heading-section ftco-animate text-center">
+          <h2 class="mt-4 pt-2 pb-5">Testimonials</h2>
+        </div>
+
+      </div>
+
+    	<div class="container-fluid">
+
+    		
+
+        <div class="row">
+          <div class="col-md-12 ftco-animate">
+            <div class="carousel-cause owl-carousel">
+
+              {% for video in queryset_5 %}
+
+                <div class="item">
+                  <div class="cause-entry">
+                    <iframe width="100%" height="315" src="{{video.url}}" frameborder="0" allowfullscreen>
+                      <a href="{% url 'main:donate_view' %}" class="img" style="background-image: url('{{cause.image.url}}');"></a>
+                    </iframe>
+                    
+                    <div class="text p-3 p-md-4">
+                      <h3>Abosedeaina Charity Foundation: Testimony From A Beneficiary</h3>
+                    </div>
+                  </div>
+                </div>
+
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+
+    	</div>
+    </section>
+
+		{% include 'volunteer_form.html' %}
+
+{% endblock %}

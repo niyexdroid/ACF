@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ACF | Blogpost{% endblock %}
+
+{% block overlay_img_url %} {% static 'images/bg_11.jpg' %} {% endblock %}
+{% block overlay_name %} Blogpost {% endblock %}
+{% block other_link %} Blog {% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'search_posts.css' %}">
+{% endblock %}
+
+{% block content %} 
+
+
+    <section class="ftco-section bg-light">
+      <div class='container-fluid'>
+        <div class="row justify-content-center pb-2">
+          <div class='col-md-3'></div>
+          <!-- <div class="col-md-7 heading-section ftco-animate text-center mt-4"> -->
+          <div class="col-md-5 heading-section ftco-animate text-center mt-4">
+            <h2 class="mb-3">Check out our latest Posts!</h2>
+          </div>
+          <div class="col-md-3 sidebar ftco-animate">
+            <div class='sidebar-box'>
+              <form action="." class="search-form" id="postSearchForm" method="POST" autocomplete="off">
+                {% csrf_token %}
+                <div class="form-group">
+                  <span class="icon fa fa-search"></span>
+                  <input type="text" id="postSearchBox" name="search_query" class="form-control" placeholder="Search Posts">
+                </div>
+              </form>
+              <div id="postResultBox" class="post-results-card not-visible w-100" ></div>
+            </div>
+
+            <div id="postResultBox" class="post-results-card not-visible w-100" ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row d-flex">
+          
+          {% for post in posts %}
+            <div class="col-md-4 d-flex ftco-animate">
+              <div class="blog-entry align-self-stretch">
+                <a href="{{post.get_absolute_url}}" class="block-20" style="background-image: url('{{post.image.url|default_if_none:None}}');">
+                </a>
+                <div class="text p-4 d-block">
+                  <div class="meta mb-3">
+                    <div><a href="{{post.get_absolute_url}}"><span class="icon-calendar"></span> {{post.creation_date}}</a></div>
+                    <div><a href="{{post.get_absolute_url}}"><span class="icon-person"></span> {{post.author}}</a></div>
+                    <div><a href="{{post.get_absolute_url}}"><span class="icon-chat"></span> {{post.comment_count}}</a></div>
+                    
+                  </div>
+                  <h3 class="heading mt-3"><a href="{{post.get_absolute_url}}">{{post.title}}</a></h3>
+                  <p>{{post.content|truncatechars:100}}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor%}
+          
+
+        </div>
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+                {% if posts.has_previous %}
+                        <li><a href="?page=1">&lt;&lt;</a></li>
+                    <li><a href="?page={{events.previous_page_number}}">&lt;</a></li>
+                {% endif %}
+
+                {% for page_number in custom_range %}
+                  {% if page_number == posts.number %}
+                    <li class="active"><a href="?page={{page_number}}">{{page_number}}</a></li>
+                  {% else %}
+                    <li><a href="?page={{page_number}}">{{page_number}}</a></li>
+                  {% endif %}
+                {% endfor %}
+
+                {% if posts.has_next %}
+                    <li><a href="?page={{events.next_page_number}}">&gt;</a></li>
+                  <li><a href="?page={{paginator.num_pages}}">&gt;&gt;</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+		
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'search_posts.js' %}" defer></script>
+{% endblock %}
